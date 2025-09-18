@@ -19,9 +19,6 @@ def _to_float(expr):
 def compute_score(pred: str, gt: str, rel_tol: float = 0.01) -> bool:
     """Compare two LaTeX strings for mathematical equivalence."""
     
-    pred = "\\boxed{" + pred + "}"
-    gt = "\\boxed{" + gt + "}"
-    
     try:
         p_val = float(pred)
         g_val = float(gt)
@@ -34,6 +31,9 @@ def compute_score(pred: str, gt: str, rel_tol: float = 0.01) -> bool:
             pred = str(pred)
         if not isinstance(gt, str):
             gt = str(gt)
+            
+        pred = "\\boxed{" + pred + "}"
+        gt = "\\boxed{" + gt + "}"
 
         p_exprs = parse(pred)
         g_exprs = parse(gt)

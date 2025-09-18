@@ -24,23 +24,27 @@ def compute_score(model_output: str, ground_truth: str) -> bool:
     extracted_model_output = model_output
     
     try:
-        prime_score, _ , extracted_model_output = prime_compute_score(model_output, ground_truth)
+        prime_score, _ , prime_extracted_output = prime_compute_score(model_output, ground_truth)
+        print(1)
+        extracted_model_output = prime_extracted_output
         if prime_score:
             return 1.0, extracted_model_output
     except Exception as e:
         prime_score = 0.0
         
     try:
-        math_verify_score, math_verify_extracted_model_output = math_verify_compute_score(norm_string(model_output), ground_truth)
+        math_verify_score, extracted_model_output = math_verify_compute_score(norm_string(model_output), ground_truth)
+        print(2)
         if math_verify_score:
-            return 1.0, math_verify_extracted_model_output
+            return 1.0, extracted_model_output[1]
     except Exception as e:
         math_verify_score = 0.0
         
     try:
-        rel_score = rel_compute_score(norm_string(extracted_model_output), ground_truth, rel_tol=0.01)
+        rel_score = rel_compute_score(norm_string(prime_extracted_output), ground_truth, rel_tol=0.01)
+        print(3)
         if rel_score:
-            return 1.0, extracted_model_output
+            return 1.0, prime_extracted_output
     except Exception as e:
         rel_score = 0.0
         

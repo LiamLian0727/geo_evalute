@@ -17,7 +17,10 @@ def _to_float(expr):
     return float(expr)
 
 def compute_score(pred: str, gt: str, rel_tol: float = 0.01) -> bool:
+    """Compare two LaTeX strings for mathematical equivalence."""
     
+    pred = "\\boxed{" + pred + "}"
+    gt = "\\boxed{" + gt + "}"
     
     try:
         p_val = float(pred)

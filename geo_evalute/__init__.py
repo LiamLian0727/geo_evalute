@@ -26,7 +26,6 @@ def compute_score(model_output: str, ground_truth: str) -> bool:
     try:
         prime_score, _ , prime_extracted_output = prime_compute_score(model_output, ground_truth)
         extracted_model_output = prime_extracted_output
-        print(1)
         if prime_score:
             return 1.0, extracted_model_output
     except Exception as e:
@@ -34,7 +33,6 @@ def compute_score(model_output: str, ground_truth: str) -> bool:
         
     try:
         math_verify_score, extracted_model_output = math_verify_compute_score(norm_string(model_output), ground_truth)
-        print(2)
         if math_verify_score:
             return 1.0, extracted_model_output[1]
     except Exception as e:
@@ -42,7 +40,6 @@ def compute_score(model_output: str, ground_truth: str) -> bool:
         
     try:
         rel_score = rel_compute_score(norm_string(prime_extracted_output), ground_truth, rel_tol=0.01)
-        print(3)
         if rel_score:
             return 1.0, prime_extracted_output
     except Exception as e:

@@ -21,6 +21,12 @@ except ImportError:
 
 
 def compute_score(model_output: str, ground_truth: str, timeout_score: float = 0) -> bool:
+    
+    if not isinstance(model_output, str):
+        model_output = str(model_output)
+    if not isinstance(ground_truth, str):
+        ground_truth = str(ground_truth)
+
     verify_func = math_metric(
         gold_extraction_target=(LatexExtractionConfig(),),
         pred_extraction_target=(ExprExtractionConfig(), LatexExtractionConfig()),

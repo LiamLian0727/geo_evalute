@@ -24,7 +24,7 @@ def compute_score(model_output: str, ground_truth: str) -> bool:
     extracted_model_output = model_output
     
     try:
-        prime_score, _ , extracted_model_output = prime_compute_score(model_output, ground_truth)[0]
+        prime_score, _ , extracted_model_output = prime_compute_score(model_output, ground_truth)
         if prime_score:
             return 1.0, extracted_model_output
     except Exception as e:

@@ -27,6 +27,11 @@ def compute_score(pred: str, gt: str, rel_tol: float = 0.01) -> bool:
         pass
     
     try:
+        if not isinstance(pred, str):
+            pred = str(pred)
+        if not isinstance(gt, str):
+            gt = str(gt)
+
         p_exprs = parse(pred)
         g_exprs = parse(gt)
 
